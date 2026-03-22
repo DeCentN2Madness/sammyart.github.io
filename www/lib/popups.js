@@ -41,9 +41,11 @@ $(document).ready(function () {
         { src: 'img/infographics/04 infographics (Carbon Icons).jpg' },
         { src: 'img/infographics/05 infographics (Carbon Footprint).jpg' },
         { src: 'img/infographics/07 infographics (HOPE).jpg' },
-        { src: 'img/infographics/08 infographics (Evergreen Vendor Map).jpg' },
+        { src: 'img/infographics/08 infographics (Uber).jpg' },
         { src: 'img/infographics/09 infographics (JJ was here).jpg' },
-        { src: 'img/infographics/10 infographics (UCI vendor map).jpg' }
+        { src: 'img/infographics/11 infographics (Herzing).jpg' },
+        { src: 'img/infographics/12 infographics (Cable Internet Spread).jpg' },
+        { src: 'img/infographics/13 infographics (Medical Office Phone).jpg' }
       ],
       gallery: {
         enabled: true
@@ -98,7 +100,10 @@ $(document).ready(function () {
         { src: 'img/packaging/01 packaging (Tropito).jpg' },
         { src: 'img/packaging/02 packaging (javacity).jpg' },
         { src: 'img/packaging/03 packaging (Junmai Ginjo Sake).jpg' },
-        { src: 'img/packaging/04 packaging (Juice Core).jpg' }
+        { src: 'img/packaging/07 packaging (lunchables).png' },
+        { src: 'img/packaging/04 packaging (Juice Core).jpg' },
+        { src: 'img/packaging/05 packaging (Grow To Be).jpg' },
+        { src: 'img/packaging/08 packaging (dreyers).png' }
       ],
       gallery: {
         enabled: true
@@ -149,7 +154,10 @@ $(document).ready(function () {
         { src: 'img/infographics/05p infographics (carbon cards).jpg' },
         { src: 'img/infographics/06p infographics (carbon foot).jpg' },
         { src: 'img/infographics/07p infographics (HOPE).jpg' },
-        { src: 'img/infographics/10 infographics (UCI vendor map).jpg' }
+        { src: 'img/infographics/08p infographics (Uber).jpg' },
+        { src: 'img/infographics/11p infographics (Herzing).jpg' },
+        { src: 'img/infographics/12 infographics (Cable Internet Spread).jpg' },
+        { src: 'img/infographics/13 infographics (Medical Office Phone).jpg' }
       ],
       gallery: {
         enabled: true
@@ -204,7 +212,10 @@ $(document).ready(function () {
         { src: 'img/packaging/01p packaging (Tropito).jpg' },
         { src: 'img/packaging/02p packaging (javacity).jpg' },
         { src: 'img/packaging/03p packaging (Junmai Ginjo Sake).jpg' },
-        { src: 'img/packaging/04p packaging (Juice Core).jpg' }
+        { src: 'img/packaging/07 packaging (lunchables).png' },
+        { src: 'img/packaging/04p packaging (Juice Core).jpg' },
+        { src: 'img/packaging/05p packaging (Grow To Be).jpg' },
+        { src: 'img/packaging/08 packaging (dreyers).png' }
       ],
       gallery: {
         enabled: true
@@ -251,24 +262,42 @@ $(document).ready(function () {
     },
     type: 'image'
   });
-  $('#Wish-Bone').magnificPopup({
+
+  $('#animation').magnificPopup({
     items: [
-      { src: 'img/Wish-Bone/01 Wish-Bone (italian bottle).jpg' },
-      { src: 'img/Wish-Bone/02 Wish-Bone (couple).jpg' },
-      { src: 'img/Wish-Bone/03 Wish-Bone (worlds color).jpg' },
-      { src: 'https://www.youtube.com/watch?v=uFXYwTafVqc?rel=0', type: 'iframe' }
+/*
+      { src: 'img/animation/Wish-Bone/01 Wish-Bone (italian bottle).jpg' },
+      { src: 'img/animation/Wish-Bone/02 Wish-Bone (couple).jpg' },
+      { src: 'img/animation/Wish-Bone/03 Wish-Bone (worlds color).jpg' },
+*/
+      { src: 'https://www.youtube.com/watch?v=hD-I3UVAEcg?rel=0' },
+      { src: 'img/animation/been-jammin.gif', type: 'image' },
+      { src: 'https://www.youtube.com/watch?v=x5HRK1qEePI?rel=0' },
+      { src: 'img/animation/chain_pump.mp4' },
+      { src: 'img/animation/Wish-Bone/CoolandHot.mp4' }
     ],
     gallery: {
       enabled: true
     },
-    type: 'image'
+    type: 'iframe',
+	iframe: {
+	markup: '<div class="mfp-iframe-scaler"><button title="Close" type="button" class="mfp-close">Close</button><iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'},
+/*	iframe: {
+      markup: '<div class="iframe-popup">'+
+        '<iframe class="mfp-iframe" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>'+
+        '<div class="mfp-close"></div>'+
+      '</div>'
+    },*/
   });
+
   $('#posters').magnificPopup({
     items: [
       { src: 'img/posters/01 posters (EOS - full plate).jpg' },
+      { src: 'img/posters/02 posters (Healthy NYU Services).png' },
       { src: 'img/posters/02 posters (EOS - campus eats).jpg' },
       { src: 'img/posters/03 posters (EOS - tree).jpg' },
       { src: 'img/posters/04 posters (EOS - bob breakfast).jpg' },
+      { src: 'img/posters/06 posters (Healthy NYU).png' },
       { src: 'img/posters/05 posters (EOS - explore).jpg' },
       { src: 'img/posters/06 posters (EOS - happy place).jpg' },
       { src: 'img/posters/07 posters (EOS - funky flag).jpg' },

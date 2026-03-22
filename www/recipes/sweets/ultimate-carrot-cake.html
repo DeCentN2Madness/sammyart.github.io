@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gluten-Free Carrot Cake (Monk Fruit Sweetened)</title>
+  <style>
+/* ===========================
+   Global palette & tokens
+   =========================== */
+
+:root {
+  --bg-page: #f7f3ee;         /* warm, soft background */
+  --bg-elevated: #ffffff;     /* card background */
+  --accent: #d47a3c;          /* warm carrot orange */
+  --accent-soft: #f7d9ba;     /* soft accent tint */
+  --accent-dark: #5a3920;     /* deep brown accent */
+  --text: #2d2621;            /* main text */
+  --muted: #8a7a6d;           /* secondary text */
+  --border: #e1d5cc;          /* light border */
+  --radius-lg: 18px;
+  --radius-md: 10px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --max-width: 960px;
+}
+
+/* ===========================
+   Reset-ish + base
+   =========================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background:
+    radial-gradient(circle at top left, #fdf6ee 0, transparent 50%),
+    radial-gradient(circle at bottom right, #f3eadf 0, transparent 55%),
+    var(--bg-page);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ===========================
+   Page shell
+   =========================== */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+
+.site-header {
+  border-bottom: 1px solid rgba(225, 213, 204, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.site-header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Jump-to-recipe button default (desktop / larger screens) */
+.jump-to-recipe {
+  margin-left: auto; /* pushes it to the far right */
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.88rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.1s ease,
+    border-color 0.18s ease;
+}
+
+.jump-to-recipe:hover {
+  background: #e1893f;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.jump-to-recipe:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.jump-to-recipe:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+}
+
+.site-brand {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent-dark);
+  font-size: 0.95rem;
+}
+
+.site-tagline {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+/* Main layout */
+
+.layout {
+  max-width: var(--max-width);
+  margin: 2rem auto 2.75rem;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column; /* single column: article then recipe */
+  gap: 2rem;
+}
+
+/* Footer */
+
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(225, 213, 204, 0.85);
+  background: #f6efe7;
+  text-align: center;
+  padding: 0.75rem 1rem 0.9rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ===========================
+   Blog article block
+   =========================== */
+
+.blog-article {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.9rem 1.9rem 2.1rem;
+}
+
+.blog-article h1 {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+  font-size: 2rem;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.blog-article h2 {
+  margin-top: 1.9rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 0.6rem;
+}
+
+.blog-article h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+  color: var(--accent-dark);
+}
+
+.blog-article p {
+  margin: 0.45rem 0 0.9rem;
+}
+
+.blog-article ul,
+.blog-article ol {
+  margin: 0.4rem 0 1rem 1.4rem;
+}
+
+.blog-article li {
+  margin: 0.15rem 0;
+}
+
+/* Optional: subtle horizontal rules in article */
+
+.blog-article hr {
+  border: none;
+  border-top: 1px dashed rgba(225, 213, 204, 0.8);
+  margin: 1.6rem 0;
+}
+
+/* ===========================
+   Recipe column & card
+   =========================== */
+
+.recipe-column {
+  /* now simply stacks under article, no sticky */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Card container */
+
+.recipe-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.8rem 1.8rem 1.6rem;
+}
+
+/* Card header */
+
+.recipe-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.recipe-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+}
+
+.recipe-meta {
+  font-size: 0.84rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+
+.meta-pill {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.meta-text {
+  margin-left: 0.25rem;
+}
+
+/* Card headings & lists */
+
+.recipe-card h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.12rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.5rem;
+}
+
+.recipe-card h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.98rem;
+  color: var(--accent-dark);
+}
+
+.recipe-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.recipe-card li {
+  margin: 0.18rem 0;
+}
+
+.recipe-card ol {
+  padding-left: 1.25rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.recipe-card ol li {
+  margin-bottom: 0.55rem;
+}
+
+/* Nutrition tables */
+
+.recipe-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.1rem;
+  font-size: 0.82rem;
+  box-shadow: var(--shadow-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.recipe-card caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+}
+
+.recipe-card th,
+.recipe-card td {
+  padding: 0.45rem 0.4rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+  background: #fffdfb;
+}
+
+.recipe-card th {
+  background: #f4ebe3;
+  font-weight: 600;
+}
+
+.recipe-card tbody tr:nth-child(even) td {
+  background: #fbf7f3;
+}
+
+.recipe-card .nutrition-footnote {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Note block */
+
+.recipe-card .note {
+  font-size: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  background: #f9efe6;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+  margin-top: 0.8rem;
+}
+
+/* Card actions (buttons under card) */
+
+.recipe-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.recipe-button {
+  flex: 1 1 180px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: background 0.18s ease, box-shadow 0.18s ease,
+    transform 0.1s ease, border-color 0.18s ease;
+}
+
+.recipe-button--secondary {
+  background: #fff7f0;
+  color: var(--accent-dark);
+}
+
+.recipe-button:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.recipe-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* ===========================
+   Responsive tweaks
+   =========================== */
+
+@media (max-width: 720px) {
+  .layout {
+    margin-top: 1.5rem;
+    margin-bottom: 2.25rem;
+    padding: 0 1rem;
+  }
+
+  .blog-article,
+  .recipe-card {
+    padding: 1.4rem 1.2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .blog-article h1 {
+    font-size: 1.7rem;
+  }
+
+  .recipe-title {
+    font-size: 1.45rem;
+  }
+
+  .site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .jump-to-recipe {
+    margin-left: 0;         /* remove the auto push-right */
+    margin-top: 0.4rem;
+    align-self: center;     /* center horizontally in the header */
+    width: auto;
+  }
+
+  /* You can slightly shrink text on small screens if desired */
+  .site-brand {
+    font-size: 0.9rem;
+  }
+
+  .site-tagline {
+    font-size: 0.82rem;
+  }
+}
+
+/* ===========================
+   Print: card only
+   =========================== */
+
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  .site-header,
+  .site-footer,
+  .blog-article,
+  .recipe-card-actions {
+    display: none !important;
+  }
+
+  .layout {
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipe-column {
+    margin: 0;
+  }
+
+  #recipe-card {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 100% !important;
+    padding: 0;
+  }
+
+  .recipe-card {
+    padding: 0;
+  }
+
+  .recipe-card table {
+    font-size: 0.8rem;
+    box-shadow: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/recipes/" class="site-brand">Samanich Kitchen</a>
+        <span class="site-tagline">Recipes for Real-Life Constraints</span>
+        <a href="#recipe-card" class="jump-to-recipe">Jump to recipe</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <article class="blog-article" id="article">
+        <h1 id="gluten-free-carrot-cake-no-sugar-no-nuts-yolks-only-">Gluten-Free Carrot Cake (No Sugar, No Nuts, Yolks-Only)</h1>
+        <p>This carrot cake is for the days you want the classic bakery experience… without gluten, refined sugar, nuts, or egg whites.</p>
+        <p>Instead of wheat flour and sugar, this recipe uses:</p>
+        <ul>
+          <li><strong>Oat flour, brown rice flour, and tapioca starch</strong> for a tender crumb</li>
+          <li><strong>Egg yolks only</strong> for richness and structure</li>
+          <li><strong>Lakanto monk fruit/erythritol blend</strong> for sweetness</li>
+          <li>A touch of <strong>heavy cream</strong> for a lush texture with relatively low lactose</li>
+          <li>Plenty of <strong>finely grated carrot</strong> to keep the cake moist</li>
+        </ul>
+        <p>The result is a <strong>moist, rich, but not overly dense</strong> carrot cake that you can stack into a beautiful two-layer 9-inch cake with cream cheese frosting.</p>
+        <h2 id="why-these-ingredients-work-and-how-they-play-together-">Why These Ingredients Work (and How They Play Together)</h2>
+        <h3 id="the-flour-blend-oat-brown-rice-and-tapioca">The flour blend: oat, brown rice, and tapioca</h3>
+        <p>Instead of a premade gluten-free mix, this cake uses a simple trio:</p>
+        <ul>
+          <li><p><strong>Oat flour (certified gluten-free)</strong></p>
+            <ul>
+              <li>Brings a gentle, almost “homey” flavor and tenderness.</li>
+              <li>Helps prevent the cake from feeling gritty.</li>
+            </ul>
+          </li>
+          <li><p><strong>Brown rice flour</strong></p>
+            <ul>
+              <li>Adds structure so the layers slice cleanly.</li>
+              <li>Balances the softness of oat flour so the cake doesn’t collapse.</li>
+            </ul>
+          </li>
+          <li><p><strong>Tapioca starch</strong></p>
+            <ul>
+              <li>Adds lightness and a bit of chew.</li>
+              <li>Helps the cake stay moist rather than crumbly.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Together, they mimic the behavior of cake flour: tender, not gummy, and strong enough to hold up as a layered cake.</p>
+        <h3 id="egg-yolks-only-rich-and-gentle">Egg yolks only: rich and gentle</h3>
+        <p>We skip egg whites entirely and use <strong>yolks only</strong>, which:</p>
+        <ul>
+          <li>Emulsify fat and liquids, helping the batter stay smooth</li>
+          <li>Add richness and color</li>
+          <li>Contribute to structure without the rubbery bounce that whites can sometimes create in gluten-free baking</li>
+        </ul>
+        <p>To back this up, we add an <strong>optional flax “egg”</strong> that behaves like a bit of gentle scaffolding for the crumb.</p>
+        <h3 id="sweetness-without-sugar-lakanto-optional-honey-or-banana">Sweetness without sugar: Lakanto + optional honey or banana</h3>
+        <p>For the main sweetness, this recipe uses:</p>
+        <ul>
+          <li><p><strong>Lakanto Classic monk fruit/erythritol blend</strong> (1:1 sugar replacement)</p>
+            <ul>
+              <li>Bakes like sugar in volume.</li>
+              <li>Does not caramelize the same way sugar does, so the cake won’t brown quite as deeply.</li>
+              <li>Erythritol gives a slight “cooling” sensation, which can be softened with…</li>
+            </ul>
+          </li>
+          <li><p><strong>Optional honey</strong></p>
+            <ul>
+              <li>Adds floral notes and just a little real sugar for those who tolerate it.</li>
+              <li>Helps with moisture and a more classic mouthfeel.</li>
+            </ul>
+          </li>
+          <li><p><strong>Optional very ripe banana</strong></p>
+            <ul>
+              <li>Adds natural sweetness and additional moisture.</li>
+              <li>Slightly denser crumb, but lovely if you like a hint of banana.</li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>
+          <p>If you must strictly avoid all sugar, simply <strong>omit the honey</strong> and use only Lakanto (and banana if desired).</p>
+        </blockquote>
+        <h3 id="cream-yogurt-and-oil-balancing-richness-and-moisture">Cream, yogurt, and oil: balancing richness and moisture</h3>
+        <p>Instead of regular milk, we use a <strong>heavy cream + water combo</strong>, plus yogurt and oil:</p>
+        <ul>
+          <li><p><strong>Heavy cream + water</strong></p>
+            <ul>
+              <li>Cream adds fat and tenderness while staying relatively low in lactose.</li>
+              <li>Thinning it with water keeps the batter from becoming too heavy.</li>
+            </ul>
+          </li>
+          <li><p><strong>Full-fat yogurt</strong> (dairy or coconut)</p>
+            <ul>
+              <li>Adds tang and moisture.</li>
+              <li>Reacts with baking soda for a better rise.</li>
+            </ul>
+          </li>
+          <li><p><strong>Neutral oil</strong> (like avocado, sunflower, or light olive)</p>
+            <ul>
+              <li>Stays fluid when chilled, so the cake doesn’t turn hard in the fridge.</li>
+              <li>Helps the crumb feel soft and moist for days.</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="carrots-and-flavor-boosters">Carrots and flavor boosters</h3>
+        <ul>
+          <li><p><strong>Very finely grated carrot</strong></p>
+            <ul>
+              <li>Disappears into the crumb, releasing moisture as it bakes.</li>
+              <li>Keeps the cake naturally sweet and tender.</li>
+            </ul>
+          </li>
+          <li><p><strong>Warm spices: cinnamon, ginger, nutmeg</strong></p>
+            <ul>
+              <li>Make the cake taste like carrot cake even without sugar.</li>
+            </ul>
+          </li>
+          <li><p><strong>Optional shredded coconut or orange zest</strong></p>
+            <ul>
+              <li>Coconut adds richness and texture (no nuts involved).</li>
+              <li>Orange zest brightens the flavors and works beautifully with carrot and cream cheese.</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="recipe-double-layer-9-inch-gluten-free-carrot-cake-no-sugar-no-nuts-yolks-only-">Recipe: Double-Layer 9-Inch Gluten-Free Carrot Cake (No Sugar, No Nuts, Yolks Only)</h2>
+        <p><strong>Yield:</strong> Two 9-inch round layers (10–12 servings)
+        <strong>Sweetener:</strong> Formulated for <strong>Lakanto Classic monk fruit/erythritol</strong>
+        <strong>Oven:</strong> 350°F / 175°C</p>
+        <h3 id="dry-ingredients">Dry ingredients</h3>
+        <ul>
+          <li>2 cups (200 g) <strong>oat flour</strong> (certified gluten-free)</li>
+          <li>1½ cups (180 g) <strong>brown rice flour</strong></li>
+          <li>½ cup (60 g) <strong>tapioca starch</strong></li>
+          <li>3 tsp <strong>baking powder</strong> (gluten-free)</li>
+          <li>¾ tsp <strong>baking soda</strong></li>
+          <li>¾ tsp <strong>fine sea salt</strong></li>
+          <li>4 tsp <strong>ground cinnamon</strong></li>
+          <li>1 tsp <strong>ground ginger</strong></li>
+          <li>½ tsp <strong>ground nutmeg</strong></li>
+        </ul>
+        <h3 id="egg-binder">Egg &amp; binder</h3>
+        <ul>
+          <li>8 large <strong>egg yolks</strong>, room temperature (no whites)</li>
+          <li>2 Tbsp <strong>ground flaxseed</strong> (optional but recommended)</li>
+          <li>6 Tbsp <strong>warm water</strong> (for the flax)</li>
+        </ul>
+        <h3 id="sweeteners-wet-ingredients">Sweeteners &amp; wet ingredients</h3>
+        <ul>
+          <li>1⅓ cups (about 260 g) <strong>Lakanto Classic monk fruit/erythritol blend</strong></li>
+          <li><p>3–4 Tbsp <strong>runny honey</strong>, optional</p>
+            <ul>
+              <li>Use the higher end if you like a sweeter cake and tolerate a little sugar.</li>
+            </ul>
+          </li>
+          <li>½ cup (about 120 g) <strong>very ripe banana</strong>, well mashed (optional but nice)</li>
+          <li>⅔ cup (160 ml) <strong>neutral oil</strong> (avocado, sunflower, or light olive)</li>
+          <li>½ cup (120 g) <strong>full-fat plain yogurt</strong> (dairy or coconut)</li>
+          <li><p><strong>Cream mixture:</strong></p>
+            <ul>
+              <li>½ cup (120 ml) <strong>heavy cream</strong></li>
+              <li>¼ cup (60 ml) <strong>water</strong> (or unsweetened plant milk)</li>
+            </ul>
+          </li>
+          <li>2 tsp <strong>vanilla extract</strong></li>
+          <li>2 tsp <strong>lemon juice</strong> or apple cider vinegar</li>
+        </ul>
+        <h3 id="carrot-optional-extras">Carrot &amp; optional extras</h3>
+        <ul>
+          <li>3 cups (about 360 g) <strong>very finely grated carrot</strong>, lightly packed</li>
+          <li>(Optional) ¼ cup <strong>unsweetened shredded coconut</strong></li>
+          <li>(Optional) 1–2 tsp <strong>orange zest</strong></li>
+        </ul>
+        <h3 id="sugar-free-cream-cheese-frosting-lakanto-">Sugar-free cream cheese frosting (Lakanto)</h3>
+        <ul>
+          <li>16 oz (450 g) <strong>cream cheese</strong>, softened</li>
+          <li>8 Tbsp (112 g) <strong>soft butter</strong> (or soft coconut oil for dairy-reduced, though flavor will change)</li>
+          <li>⅔–1 cup <strong>powdered Lakanto</strong> (blend granular Lakanto in a blender to powder it)</li>
+          <li>2–3 Tbsp <strong>honey</strong>, optional, for smoother texture and flavor</li>
+          <li>2 tsp <strong>vanilla extract</strong></li>
+          <li>Pinch of <strong>salt</strong></li>
+          <li>1–3 tsp <strong>milk, cream, or water</strong> as needed to adjust consistency</li>
+        </ul>
+        <h2 id="step-by-step-instructions">Step-by-Step Instructions</h2>
+        <h3 id="1-prepare-pans-and-oven">1. Prepare pans and oven</h3>
+        <ol>
+          <li>Preheat oven to <strong>350°F / 175°C</strong>.</li>
+          <li>Grease two <strong>9-inch round cake pans</strong> and line the bottoms with parchment circles. Lightly grease the parchment as well.</li>
+        </ol>
+        <h3 id="2-make-the-flax-binder-optional-">2. Make the flax binder (optional)</h3>
+        <ol>
+          <li>In a small bowl, stir together <strong>2 Tbsp ground flaxseed</strong> and <strong>6 Tbsp warm water</strong>.</li>
+          <li>Let it stand for about 5–10 minutes until thick and gel-like.</li>
+        </ol>
+        <p>This adds subtle structure, which is especially helpful in gluten-free, yolks-only baking.</p>
+        <h3 id="3-whisk-the-dry-ingredients">3. Whisk the dry ingredients</h3>
+        <p>In a medium bowl, whisk together:</p>
+        <ul>
+          <li>Oat flour, brown rice flour, tapioca starch</li>
+          <li>Baking powder, baking soda, salt</li>
+          <li>Cinnamon, ginger, nutmeg</li>
+        </ul>
+        <p>Set aside.</p>
+        <h3 id="4-build-the-yolk-sweetener-base">4. Build the yolk + sweetener base</h3>
+        <ol>
+          <li><p>In a large mixing bowl, add <strong>8 egg yolks</strong> and <strong>1⅓ cups Lakanto</strong>.</p>
+        </li>
+          <li><p>Using a hand mixer or vigorous whisking, beat for <strong>2–3 minutes</strong>, until the mixture is a bit lighter and slightly thickened.</p>
+            <ul>
+              <li>This step incorporates air and helps compensate for the lack of egg whites.</li>
+            </ul>
+          </li>
+          <li><p>Beat in:</p>
+            <ul>
+              <li>Honey (if using)</li>
+              <li>Mashed banana (if using)</li>
+              <li>Oil</li>
+              <li>Yogurt</li>
+              <li>The <strong>cream + water</strong> mixture</li>
+              <li>Vanilla extract</li>
+              <li>Lemon juice or vinegar</li>
+            </ul>
+          </li>
+          <li><p>Stir in the <strong>flax gel</strong> if you’re using it.</p></li>
+        </ol>
+        <h3 id="5-add-carrots-and-flavor-boosters">5. Add carrots and flavor boosters</h3>
+        <ol>
+          <li>Fold the <strong>finely grated carrot</strong> into the wet mixture until evenly distributed.</li>
+          <li>Stir in the <strong>shredded coconut</strong> and/or <strong>orange zest</strong> if you’re using them.</li>
+        </ol>
+        <h3 id="6-combine-wet-and-dry">6. Combine wet and dry</h3>
+        <ol>
+          <li>Sprinkle the dry ingredients over the wet in <strong>two additions</strong>, gently folding with a spatula.</li>
+          <li><p>Fold just until you no longer see dry flour.</p>
+            <ul>
+              <li>The batter will be <strong>thick but scoopable</strong>.</li>
+              <li>If it seems extremely stiff, you can add <strong>1–2 tsp of water</strong> to loosen it slightly, but avoid making it runny.</li>
+            </ul>
+          </li>
+        </ol>
+        <h3 id="7-bake-the-layers">7. Bake the layers</h3>
+        <ol>
+          <li><p>Divide the batter evenly between the two prepared 9-inch pans and smooth the tops.</p></li>
+          <li><p>Bake at <strong>350°F / 175°C for 25–32 minutes</strong>.</p>
+            <ul>
+              <li>The edges will be just pulling from the sides.</li>
+              <li>A toothpick or skewer inserted in the center should come out with a few <strong>moist crumbs</strong> but no wet batter.</li>
+            </ul>
+          </li>
+          <li><p>Cool the cakes in the pans on a rack for <strong>15 minutes</strong>.</p></li>
+          <li><p>Run a knife around the edges, invert each layer onto the rack, peel off parchment, and let them cool <strong>completely</strong> before frosting.</p></li>
+        </ol>
+        <h3 id="8-make-the-lakanto-cream-cheese-frosting">8. Make the Lakanto cream cheese frosting</h3>
+        <ol>
+          <li>In a large bowl, beat the <strong>softened cream cheese</strong> and <strong>butter</strong> until very smooth and fluffy.</li>
+          <li>Add <strong>⅔ cup powdered Lakanto</strong>, <strong>vanilla</strong>, <strong>salt</strong>, and <strong>2 Tbsp honey</strong> (if using). Beat well.</li>
+          <li><p>Taste and adjust:</p>
+            <ul>
+              <li>Add more <strong>powdered Lakanto</strong> if you want it sweeter.</li>
+              <li>Add another <strong>1 Tbsp honey</strong> if you tolerate sugar and want a rounder flavor.</li>
+              <li>If frosting is too thick, beat in <strong>1–3 tsp milk, cream, or water</strong>.</li>
+              <li>If it is too soft, chill for 10–15 minutes.</li>
+            </ul>
+          </li>
+        </ol>
+        <h3 id="9-frost-and-assemble">9. Frost and assemble</h3>
+        <ol>
+          <li>Place one cooled cake layer on your serving plate.</li>
+          <li>Spread a generous layer of frosting over the top.</li>
+          <li>Place the second layer on top, upside-down for a flatter surface, and frost the top and sides.</li>
+          <li><p>Optionally garnish with:</p>
+            <ul>
+              <li>Extra grated carrot (very lightly)</li>
+              <li>A sprinkle of shredded coconut</li>
+              <li>A little orange zest</li>
+            </ul>
+          </li>
+        </ol>
+        <p>Refrigerate to set the frosting, then slice and enjoy. The cake keeps well covered in the fridge for several days.</p>
+        <h2 id="pan-size-guide-what-to-expect-">Pan Size Guide (What to Expect)</h2>
+        <p>This recipe is written for <strong>two 9-inch round pans</strong>, but you have options:</p>
+        <h3 id="1-single-9-13-inch-pan">1. Single 9×13-inch pan</h3>
+        <ul>
+          <li>Use the <strong>full recipe</strong> for a thicker snack cake.</li>
+          <li>Bake at <strong>350°F / 175°C</strong> for about <strong>30–38 minutes</strong>.</li>
+          <li>The center takes a bit longer to set; use the toothpick test.</li>
+        </ul>
+        <h3 id="2-two-8-inch-round-pans">2. Two 8-inch round pans</h3>
+        <ul>
+          <li>Use the <strong>full recipe</strong>.</li>
+          <li>Layers will be slightly thicker than 9-inch rounds.</li>
+          <li>Bake about <strong>28–35 minutes</strong>.</li>
+          <li>Cool thoroughly; thicker layers are more fragile when warm.</li>
+        </ul>
+        <h3 id="3-cupcakes">3. Cupcakes</h3>
+        <ul>
+          <li>This recipe will make roughly <strong>24 standard cupcakes</strong>.</li>
+          <li>Fill liners about <strong>⅔ full</strong>.</li>
+          <li>Bake at <strong>350°F / 175°C for 16–20 minutes</strong>.</li>
+          <li>Cupcakes will dome slightly and may crack a little more than wheat-based ones (normal with erythritol).</li>
+          <li>Cool completely before frosting so the liners don’t peel away.</li>
+        </ul>
+        <h3 id="4-thinner-sheet-cake-12-17-jelly-roll-">4. Thinner sheet cake (12×17 jelly roll)</h3>
+        <ul>
+          <li><p>For a thinner layer (great for cutting into squares), you can:</p>
+            <ul>
+              <li>Use <strong>about ¾ of the batter</strong>, or</li>
+              <li>Use all of it and accept a slightly thicker layer.</li>
+            </ul>
+          </li>
+          <li>Bake <strong>15–22 minutes</strong>, checking early.</li>
+        </ul>
+        <h2 id="sweetener-swaps-what-changes-">Sweetener Swaps: What Changes?</h2>
+        <p>This cake is calibrated for <strong>Lakanto Classic</strong> (monk fruit + erythritol, 1:1 sugar replacement). If you’d like to try something else:</p>
+        <h3 id="using-another-monk-fruit-erythritol-brand-1-1-sugar-">Using another monk fruit/erythritol brand (1:1 sugar)</h3>
+        <ul>
+          <li>If the label says it measures like sugar, you can usually swap <strong>cup-for-cup</strong>.</li>
+          <li>Expect minor differences in sweetness and browning.</li>
+          <li>Some blends taste slightly sweeter; if unsure, start with about <strong>1¼ cups</strong> instead of 1⅓ cups, then taste the batter (safe because no raw whites) and add more if needed.</li>
+        </ul>
+        <h3 id="using-pure-erythritol-or-a-different-sugar-alcohol-blend">Using pure erythritol or a different sugar alcohol blend</h3>
+        <ul>
+          <li>Many pure erythritol products are <strong>slightly less sweet than sugar</strong> by volume.</li>
+          <li>You may want to add a bit more (e.g., <strong>1½ cups</strong>) or include honey/banana to round out the sweetness and texture.</li>
+        </ul>
+        <h3 id="using-stevia-or-pure-monk-fruit-drops">Using stevia or pure monk fruit drops</h3>
+        <ul>
+          <li>These are <strong>far more concentrated</strong> and don’t provide bulk.</li>
+          <li><p>You will need:</p>
+            <ul>
+              <li>A separate <strong>bulk ingredient</strong> (like extra yogurt or a small amount of additional flour/liquid balance).</li>
+              <li>Careful adjustment to avoid bitterness.</li>
+            </ul>
+          </li>
+          <li>This becomes a different, more experimental recipe; if you’re comfortable tinkering, start by following the base recipe but replacing part of the Lakanto with stevia/monk fruit, not all of it at once.</li>
+        </ul>
+        <h2 id="substitutions-variations">Substitutions &amp; Variations</h2>
+        <h3 id="dairy-light-or-dairy-free">Dairy-light or dairy-free</h3>
+        <ul>
+          <li><p><strong>Heavy cream &amp; yogurt:</strong></p>
+            <ul>
+              <li>You can replace both with <strong>full-fat canned coconut milk</strong> (well stirred) and <strong>coconut yogurt</strong>.</li>
+              <li>Keep the total liquid amount roughly the same and watch the batter consistency—it should be thick but scoopable.</li>
+            </ul>
+          </li>
+          <li><p><strong>Frosting:</strong></p>
+            <ul>
+              <li>Use a <strong>dairy-free cream cheese</strong> and <strong>plant butter</strong>, sweetened with powdered Lakanto.</li>
+              <li>Texture will differ slightly, but it works.</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="less-lactose-but-not-dairy-free-">Less lactose (but not dairy-free)</h3>
+        <ul>
+          <li>Use <strong>lactose-free yogurt</strong> and <strong>lactose-free cream cheese</strong>, if available.</li>
+          <li>Heavy cream is naturally low in lactose, and we’re using a modest amount.</li>
+        </ul>
+        <h3 id="without-banana-or-honey">Without banana or honey</h3>
+        <ul>
+          <li><p>Omit banana and/or honey and simply keep:</p>
+            <ul>
+              <li>The <strong>Lakanto</strong> as written, and</li>
+              <li>The <strong>yogurt + cream combo</strong> as written.</li>
+            </ul>
+          </li>
+          <li>The cake will be slightly less sweet and very slightly less moist, but still rich and tender—do not overbake.</li>
+        </ul>
+        <h3 id="texture-tweaks">Texture tweaks</h3>
+        <ul>
+          <li><p><strong>Lighter, more delicate crumb:</strong></p>
+            <ul>
+              <li>Reduce brown rice flour to <strong>1¼ cups (150 g)</strong> and increase tapioca to <strong>¾ cup (90 g)</strong>.</li>
+              <li>This gives a bit more lift and softness but can be slightly more fragile to stack.</li>
+            </ul>
+          </li>
+          <li><p><strong>More spice-forward:</strong></p>
+            <ul>
+              <li>Add an extra ½ tsp cinnamon and ¼ tsp cloves for a deeper spice profile.</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+      <aside class="recipe-column" aria-label="Recipe card">
+        <article id="recipe-card" class="recipe-card">
+          <header class="recipe-header">
+            <h1 class="recipe-title">
+              Gluten-Free Carrot Cake (Monk Fruit Sweetened, Double 9&quot; Layers)
+            </h1>
+            <div class="recipe-meta">
+              <span class="meta-pill">Gluten-free</span>
+              <span class="meta-pill">No egg whites</span>
+              <span class="meta-pill">No refined sugar</span>
+              <span class="meta-pill">Nut-free</span>
+              <span class="meta-text">Yield: 2 × 9&quot; round layers (about 12 servings)</span>
+            </div>
+          </header>
+
+    <!-- INGREDIENTS -->
+    <section>
+      <h2>Ingredients</h2>
+
+      <h3>Dry ingredients</h3>
+      <div class="ingredients-layout">
+        <ul>
+          <li>2 cups (200 g) oat flour (certified gluten-free)</li>
+          <li>1½ cups (180 g) brown rice flour</li>
+          <li>½ cup (60 g) tapioca starch</li>
+          <li>3 tsp baking powder (gluten-free)</li>
+          <li>¾ tsp baking soda</li>
+          <li>¾ tsp fine sea salt</li>
+          <li>4 tsp ground cinnamon</li>
+          <li>1 tsp ground ginger</li>
+          <li>½ tsp ground nutmeg</li>
+        </ul>
+      </div>
+
+      <h3>Egg and binder</h3>
+      <div class="ingredients-layout">
+        <ul>
+          <li>8 large egg yolks, room temperature (no whites)</li>
+          <li>2 Tbsp ground flaxseed (optional but helpful for structure)</li>
+          <li>6 Tbsp warm water (for the flaxseed)</li>
+        </ul>
+      </div>
+
+      <h3>Sweeteners and wet ingredients</h3>
+      <div class="ingredients-layout">
+        <ul>
+          <li>1⅓ cups (about 260 g) Lakanto Classic monk fruit/erythritol</li>
+          <li>3–4 Tbsp runny honey (optional)</li>
+          <li>½ cup (about 120 g) very ripe banana, well-mashed (optional)</li>
+          <li>⅔ cup (160 ml) neutral oil (such as avocado or light olive)</li>
+          <li>½ cup (120 g) full-fat plain yogurt (dairy or coconut)</li>
+          <li>½ cup (120 ml) heavy cream</li>
+          <li>¼ cup (60 ml) water (or unsweetened plant milk)</li>
+          <li>2 tsp vanilla extract</li>
+          <li>2 tsp lemon juice or apple cider vinegar</li>
+        </ul>
+      </div>
+
+      <h3>Carrot and optional extras</h3>
+      <div class="ingredients-layout">
+        <ul>
+          <li>3 cups (about 360 g) very finely grated carrot, lightly packed</li>
+          <li>¼ cup unsweetened shredded coconut (optional)</li>
+          <li>1–2 tsp orange zest (optional)</li>
+        </ul>
+      </div>
+
+      <h3>Sugar-free cream cheese frosting</h3>
+      <div class="ingredients-layout">
+        <ul>
+          <li>16 oz (450 g) cream cheese, softened</li>
+          <li>8 Tbsp (112 g) soft butter (or soft coconut oil)</li>
+          <li>
+            ⅔–1 cup powdered Lakanto (blend the granular sweetener until fine)
+          </li>
+          <li>2–3 Tbsp honey (optional, for flavor and smoothness)</li>
+          <li>2 tsp vanilla extract</li>
+          <li>Pinch of fine sea salt</li>
+          <li>1–3 tsp milk, cream, or water, as needed to loosen</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- INSTRUCTIONS -->
+    <section class="instructions">
+      <h2>Instructions</h2>
+
+      <h3>1. Prepare the pans and oven</h3>
+      <ol>
+        <li>Preheat the oven to 350°F (175°C).</li>
+        <li>
+          Grease two 9-inch round cake pans. Line the bottoms with parchment
+          circles and lightly grease the parchment.
+        </li>
+      </ol>
+
+      <h3>2. Mix the optional flax binder</h3>
+      <ol>
+        <li>
+          In a small bowl, stir together the ground flaxseed and warm water.
+        </li>
+        <li>Let sit for 5–10 minutes until thick and gel-like.</li>
+      </ol>
+
+      <h3>3. Whisk the dry ingredients</h3>
+      <ol>
+        <li>
+          In a medium bowl, whisk together the oat flour, brown rice flour,
+          tapioca starch, baking powder, baking soda, salt, cinnamon, ginger,
+          and nutmeg.
+        </li>
+        <li>Set aside.</li>
+      </ol>
+
+      <h3>4. Build the yolk and sweetener base</h3>
+      <ol>
+        <li>
+          In a large mixing bowl, combine the egg yolks and Lakanto. Beat with
+          a hand mixer or whisk vigorously for 2–3 minutes, until slightly
+          lighter and thickened.
+        </li>
+        <li>
+          Beat in the honey (if using), mashed banana (if using), oil, yogurt,
+          heavy cream, water, vanilla, and lemon juice or vinegar until smooth.
+        </li>
+        <li>Add the thickened flax mixture and stir to combine.</li>
+      </ol>
+
+      <h3>5. Add the carrots and extras</h3>
+      <ol>
+        <li>Fold the grated carrot into the wet mixture until evenly spread.</li>
+        <li>
+          Stir in shredded coconut and orange zest, if using, until just
+          combined.
+        </li>
+      </ol>
+
+      <h3>6. Combine wet and dry</h3>
+      <ol>
+        <li>
+          Sprinkle the dry mixture over the wet ingredients in two additions,
+          folding gently with a spatula after each addition.
+        </li>
+        <li>
+          Fold just until no dry streaks remain. The batter should be thick but
+          scoopable. If it is extremely stiff, add 1–2 tsp water to loosen very
+          slightly.
+        </li>
+      </ol>
+
+      <h3>7. Bake the cake layers</h3>
+      <ol>
+        <li>
+          Divide the batter evenly between the two prepared pans and smooth the
+          tops.
+        </li>
+        <li>
+          Bake at 350°F (175°C) for 25–32 minutes. The edges should be just
+          pulling from the sides, and a toothpick in the center should come out
+          with a few moist crumbs but no wet batter.
+        </li>
+      </ol>
+
+      <h3>8. Cool completely</h3>
+      <ol>
+        <li>Cool the cakes in the pans on a rack for 15 minutes.</li>
+        <li>
+          Run a knife around the edges, invert onto a rack, peel off the
+          parchment, and cool completely before frosting.
+        </li>
+      </ol>
+
+      <h3>9. Make the cream cheese frosting</h3>
+      <ol>
+        <li>
+          In a large bowl, beat the softened cream cheese and butter until very
+          smooth and fluffy.
+        </li>
+        <li>
+          Add ⅔ cup powdered Lakanto, vanilla, salt, and 2 Tbsp honey (if
+          using). Beat until smooth. Adjust sweetness with more powdered
+          Lakanto and honey if desired.
+        </li>
+        <li>
+          If the frosting is too thick, beat in 1–3 tsp milk, cream, or water.
+          If it is too soft, chill for 10–15 minutes to firm up.
+        </li>
+      </ol>
+
+      <h3>10. Assemble and frost</h3>
+      <ol>
+        <li>Place one cooled cake layer on a serving plate.</li>
+        <li>Spread a generous layer of frosting over the top.</li>
+        <li>
+          Place the second layer on top (bottom side up for a flatter surface)
+          and frost the top and sides.
+        </li>
+        <li>
+          Chill briefly to set the frosting, then slice into about 12 servings.
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Other pan sizes:</strong> For a 9×13-inch pan, use the full
+        batter and bake 30–38 minutes. For cupcakes, fill liners about two
+        thirds full and bake 16–20 minutes.
+      </div>
+    </section>
+
+    <!-- NUTRITION -->
+    <section class="nutrition-section">
+      <h2>Nutrition Information</h2>
+
+      <table>
+        <caption>Selected Ingredients (per 100 g, unless noted)</caption>
+        <thead>
+          <tr>
+            <th>Ingredient</th>
+            <th>Calories (kcal)</th>
+            <th>Carbs (g)</th>
+            <th>Protein (g)</th>
+            <th>Fat (g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Oat flour</td>
+            <td>≈404</td>
+            <td>≈66</td>
+            <td>≈15</td>
+            <td>≈9</td>
+          </tr>
+          <tr>
+            <td>Brown rice flour</td>
+            <td>≈363</td>
+            <td>≈76</td>
+            <td>≈7</td>
+            <td>≈3</td>
+          </tr>
+          <tr>
+            <td>Tapioca starch</td>
+            <td>≈353</td>
+            <td>≈88</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Carrot, raw</td>
+            <td>≈41</td>
+            <td>≈9</td>
+            <td>≈1</td>
+            <td>≈0</td>
+          </tr>
+          <tr>
+            <td>Heavy cream</td>
+            <td>≈345</td>
+            <td>≈3</td>
+            <td>≈2</td>
+            <td>≈37</td>
+          </tr>
+          <tr>
+            <td>Plain whole-milk yogurt</td>
+            <td>≈61</td>
+            <td>≈5</td>
+            <td>≈4</td>
+            <td>≈3</td>
+          </tr>
+          <tr>
+            <td>Avocado oil (per 1 Tbsp)</td>
+            <td>≈124</td>
+            <td>0</td>
+            <td>0</td>
+            <td>≈14</td>
+          </tr>
+          <tr>
+            <td>Cream cheese</td>
+            <td>≈349</td>
+            <td>≈3</td>
+            <td>≈8</td>
+            <td>≈35</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <caption>
+          Approximate Nutrition for Finished Cake (1 slice of 12)
+        </caption>
+        <thead>
+          <tr>
+            <th>Serving</th>
+            <th>Calories (kcal)</th>
+            <th>Carbs (g)</th>
+            <th>Protein (g)</th>
+            <th>Fat (g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cake only (no frosting)</td>
+            <td>≈330</td>
+            <td>≈37</td>
+            <td>≈4.5</td>
+            <td>≈19</td>
+          </tr>
+          <tr>
+            <td>Cake with frosting</td>
+            <td>≈540</td>
+            <td>≈41</td>
+            <td>≈7</td>
+            <td>≈39</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="nutrition-footnote">
+        Values are approximate estimates for a 12-slice double-layer cake and
+        will vary with specific brands, use of banana and honey, and minor
+        measurement differences. Sugar alcohols from Lakanto are not included
+        in the calorie totals.
+      </p>
+    </section>
+  </article>
+
+        <div class="recipe-card-actions">
+          <button type="button" id="print-recipe" class="recipe-button">
+            🖨 Print recipe
+          </button>
+          <button type="button" id="download-recipe" class="recipe-button recipe-button--secondary">
+            ⬇ Download recipe (HTML)
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <small>&copy; <span id="year"></span> Samanich.com &middot; Gluten-free home baking.</small>
+    </footer>
+  </div>
+
+  <script>
+    // Optional: set footer year
+document.addEventListener("DOMContentLoaded", () => {
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
+
+// Card-only CSS for the downloaded file (no site layout styles)
+const RECIPE_CARD_STYLES = `
+:root {
+  --bg: #f5f3f0;
+  --bg-elevated: #ffffff;
+  --accent: #d07a3b;
+  --accent-soft: #f2d3b6;
+  --accent-dark: #5a3920;
+  --text: #2c2622;
+  --muted: #7a6c62;
+  --border: #e0d5cc;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.recipe-card {
+  max-width: 800px;
+  margin: 1.5rem auto 2rem;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+
+.recipe-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.recipe-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+}
+
+.recipe-meta {
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+
+.meta-pill {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.meta-text {
+  margin-left: 0.25rem;
+}
+
+/* Headings and lists inside card */
+.recipe-card h2 {
+  margin-top: 1.4rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.45rem;
+}
+
+.recipe-card h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.98rem;
+  color: var(--accent-dark);
+}
+
+.recipe-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.recipe-card li {
+  margin: 0.2rem 0;
+}
+
+.recipe-card ol {
+  padding-left: 1.25rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.recipe-card ol li {
+  margin-bottom: 0.55rem;
+}
+
+/* Tables */
+.recipe-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.1rem;
+  font-size: 0.82rem;
+}
+
+.recipe-card caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+}
+
+.recipe-card th,
+.recipe-card td {
+  padding: 0.45rem 0.4rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.recipe-card th {
+  background: #f4ebe3;
+  font-weight: 600;
+}
+
+.recipe-card tbody tr:nth-child(even) td {
+  background: #fbf7f3;
+}
+
+.recipe-card .nutrition-footnote {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.recipe-card .note {
+  font-size: 0.85rem;
+  padding: 0.7rem 0.85rem;
+  background: #f9efe6;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+  margin-top: 0.7rem;
+}
+
+/* Print inside downloaded file */
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+  .recipe-card {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+`;
+
+// Wire up buttons
+document.addEventListener("DOMContentLoaded", () => {
+  const printBtn = document.getElementById("print-recipe");
+  const downloadBtn = document.getElementById("download-recipe");
+  const card = document.getElementById("recipe-card");
+
+  if (printBtn) {
+    printBtn.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
+  if (downloadBtn && card) {
+    downloadBtn.addEventListener("click", () => {
+      // Use outerHTML so we get the <article class="recipe-card"> wrapper,
+      // but not the buttons (they live in .recipe-card-actions).
+      const cardHTML = card.outerHTML;
+
+      const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gluten-Free Carrot Cake (Monk Fruit Sweetened)</title>
+<style>
+${RECIPE_CARD_STYLES}
+</style>
+</head>
+<body>
+${cardHTML}
+</body>
+</html>`;
+
+      const blob = new Blob([fullHTML], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "gluten-free-carrot-cake-recipe.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }
+});
+  </script>
+</body>
+</html>

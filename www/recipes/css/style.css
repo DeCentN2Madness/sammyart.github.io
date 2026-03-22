@@ -1,0 +1,27 @@
+html {
+    color: #444;
+}
+body {
+    margin: 0 auto;
+    padding: 1rem;
+    height: 100%;
+    min-height: 100vw;
+    width: 80vw;
+    max-width: 900px;
+    background-color: #f5f5f0;
+}
+h1 {
+    color: #844;
+}
+h2 {
+    color: #448;
+}
+ul {
+    list-style-type: square;
+}
+ul li {
+    line-height: 1.4rem;
+}
+ol li {
+    line-height: 1.8rem;
+}

@@ -1,0 +1,26 @@
+:root {
+  --aia-white: #fff;
+  --aia-black: #000;
+  --aia-blue: #254080;
+  --aia-darkblue: #0e1133;
+  --aia-orange: #ffbd59;
+  --aia-darkorange: #ff914d;
+  --aia-fawn: #fcf2e2;
+
+  --card-bg: var(--aia-white);
+  --card-radius: 0.25rem;
+  --card-shadow: 4px 4px 6px #ccc;
+  --gap: 1.25rem;
+  --lightbox-shadow: 0 0 min(2vw, 2vh) var(--aia-fawn);
+  --lightbox-backdrop: #000c;
+  --max-width: 1400px;
+
+  --text: var(--aia-darkblue);
+  --link: var(--aia-darkorange);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

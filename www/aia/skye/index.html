@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIA | Skye Character Development</title>
+  <meta name="description" content="A preview of Google Call Ads developed for AIA.">
+  <meta name="author" content="DeCentN2Madness">
+  <link rel="stylesheet" href="../css/brand.css?v=1.0">
+  <style>
+    body {
+      background-color: var(--aia-white);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    header,
+    main {
+      &> * {
+        margin-inline: auto;
+        max-width: var(--max-width);
+        padding: 2rem;
+      }
+    }
+    header,
+    header * {
+      background: var(--aia-blue);
+      color: #fff;
+      text-decoration: none;
+    }
+    main {
+      background: var(--aia-fawn);
+    }
+
+    #cards {
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    figure {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      margin: var(--gap);
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      padding: 2rem;
+    }
+
+    .refresh-btn {
+      /* strip default button styling */
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;       /* same font-size, weight, etc. as h1 */
+      color: inherit;      /* match your heading color */
+      cursor: pointer;
+    }
+    .refresht-btn:focus {
+      outline: 2px solid Highlight; /* keep it keyboard-accessible */
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--card-radius);
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    /* Lightbox backdrop */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      /* start transparent, then JS will set var(--lightbox-backdrop) */
+      background: transparent;
+      transition: background 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox-content {
+      position: relative;
+    }
+
+    .lightbox-content .card {
+      box-shadow: var(--lightbox-shadow);
+      cursor: default;
+      position: relative; /* for close button */
+      transition: all 0.5s ease;
+      margin: 0;
+    }
+
+    .lightbox-content .card figure {
+      margin: min(4vw, 4vh);
+    }
+
+    .lightbox-content .card figcaption {
+      font-size: min(2vw, 2vh);
+    }
+
+    /* Close button */
+    .lightbox-content .lightbox-close {
+      position: absolute;
+      top: .2em;
+      right: .4em;
+      background: transparent;
+      border: none;
+      font-size: min(6vw, 6vh);
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1;
+      color: #000;
+      /* start scaled down */
+      transform: scale(0);
+      transform-origin: center;
+      transition: transform 0.5s ease;
+    }
+
+    /* hide default triangle */
+    .hamburger-menu summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      user-select: none;
+      margin: 0;
+      padding: 0.5em;
+    }
+    /* remove the default marker in WebKit */
+    .hamburger-menu summary::-webkit-details-marker {
+      display: none;
+    }
+    /* by default, hide the links */
+    .hamburger-menu a {
+      display: none;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      display: block;
+    }
+    /* when <details> is open, show them */
+    .hamburger-menu[open] a {
+      display: block;
+    }
+    /* optional: spacing between links */
+    .hamburger-menu a + a {
+      border-top: 1px solid #ccc;
+    }
+
+    #nav-form {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    a[aria-current="page"] {
+      color: #900;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <form id="nav-form" method="get" action="">
+      <h1>
+        <button type="submit" class="refresh-btn">AIA | Skye Character Development</button>
+      </h1>
+      <!--<nav aria-label="Main menu">
+        <details class="hamburger-menu">
+          <summary aria-label="Toggle menu">&equiv;</summary>
+          <a href="/aia/meta-ads/">Meta ad creatives</a>
+          <a href="/aia/google-call-ads/">Google call ads</a>
+          <a href="/aia/skye/" aria-current="page">AIA character development</a>
+        </details>
+      </nav>-->
+    </form>
+  </header>
+
+  <main>
+    <section id="cards">
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-1.png" alt="skye character concept 1">
+          <figcaption>Skye character concept 1</figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-2.png" alt="skye character concept 6">
+          <figcaption>Skye character concept 2</figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-3.png" alt="skye character concept 5">
+          <figcaption>Skye character concept 3</figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-4.png" alt="skye character concept 4">
+          <figcaption>Skye character concept 4</figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-5.png" alt="skye character concept 2">
+          <figcaption>Skye character concept 5</figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="img/skye-concept-6.png" alt="skye character concept 3">
+          <figcaption>Skye character concept 6</figcaption>
+        </figure>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p></p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const rect = card.getBoundingClientRect();
+
+        // Create overlay & wrapper
+        const overlay = document.createElement('div');
+        overlay.className = 'lightbox';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'lightbox-content';
+        overlay.appendChild(wrapper);
+
+        // Clone card
+        const clone = card.cloneNode(true);
+        clone.style.position = 'fixed';
+        clone.style.top    = `${rect.top}px`;
+        clone.style.left   = `${rect.left}px`;
+        clone.style.width  = `${rect.width}px`;
+        clone.style.height = `${rect.height}px`;
+
+        // Add close button (starts at scale(0) via CSS)
+        const btn = document.createElement('button');
+        btn.className = 'lightbox-close';
+        btn.innerHTML = '&times;';
+        clone.appendChild(btn);
+
+        wrapper.appendChild(clone);
+        document.body.appendChild(overlay);
+
+        // Close helper: reverse everything
+        function closeLightbox() {
+          // backdrop fade out
+          overlay.style.background = 'transparent';
+          // button shrink
+          btn.style.transform = 'scale(0)';
+          // card fly back
+          clone.style.top    = `${rect.top}px`;
+          clone.style.left   = `${rect.left}px`;
+          clone.style.transform = '';
+          clone.style.width  = `${rect.width}px`;
+          clone.style.height = `${rect.height}px`;
+
+          // remove when done
+          clone.addEventListener('transitionend', () => {
+            document.body.removeChild(overlay);
+          }, { once: true });
+        }
+
+        // Animate in on next frame
+        requestAnimationFrame(() => {
+          // backdrop fade in
+          overlay.style.background = 'var(--lightbox-backdrop)';
+          // card to center & enlarge
+          clone.style.top       = '50%';
+          clone.style.left      = '50%';
+          clone.style.transform = 'translate(-50%, -50%)';
+          clone.style.width     = 'min(90vw, 90vh)';
+          clone.style.height    = 'auto';
+          // button grow
+          btn.style.transform   = 'scale(1)';
+        });
+
+        // Dismiss on backdrop click
+        overlay.addEventListener('click', e => {
+          if (e.target === overlay) closeLightbox();
+        });
+
+        // Dismiss on close-button click
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          closeLightbox();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

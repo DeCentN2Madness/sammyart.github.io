@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIA Meta Ads Gallery</title>
+  <meta name="robots" content="noindex">
+  <script>
+    function range(start, end, step = 1) {
+      const result = [];
+      if (step === 0) throw new Error('range() step must not be 0');
+      const increasing = step > 0;
+
+      for (
+        let i = start;
+        increasing ? i <= end : i >= end;
+        i += step
+      ) {
+        result.push(i);
+      }
+
+      return result;
+    }
+    const runningIndices    = [ 1, 3, 4, 6, 7, 10, 11, 12, 14, 15, 18, 19, 20, 34, 35, 36 ];
+    const ABALeadAds        = [ ...range(1, 20), 34, 35, 36 ];
+    const AcademicABAAds    = [ 21, 22, 23, 26, 27, 30, 31, 32, 33 ];
+    const AcademicNonABAAds = [ 24, 25, 28 ];
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-facebook" viewBox="0 0 50 50">
+      <path d="M 25 3 C 12.861562 3 3 12.861562 3 25 C 3 36.019135 11.127533 45.138355 21.712891 46.728516 L 22.861328 46.902344 L 22.861328 29.566406 L 17.664062 29.566406 L 17.664062 26.046875 L 22.861328 26.046875 L 22.861328 21.373047 C 22.861328 18.494965 23.551973 16.599417 24.695312 15.410156 C 25.838652 14.220896 27.528004 13.621094 29.878906 13.621094 C 31.758714 13.621094 32.490022 13.734993 33.185547 13.820312 L 33.185547 16.701172 L 30.738281 16.701172 C 29.349697 16.701172 28.210449 17.475903 27.619141 18.507812 C 27.027832 19.539724 26.84375 20.771816 26.84375 22.027344 L 26.84375 26.044922 L 32.966797 26.044922 L 32.421875 29.564453 L 26.84375 29.564453 L 26.84375 46.929688 L 27.978516 46.775391 C 38.71434 45.319366 47 36.126845 47 25 C 47 12.861562 37.138438 3 25 3 z M 25 5 C 36.057562 5 45 13.942438 45 25 C 45 34.729791 38.035799 42.731796 28.84375 44.533203 L 28.84375 31.564453 L 34.136719 31.564453 L 35.298828 24.044922 L 28.84375 24.044922 L 28.84375 22.027344 C 28.84375 20.989871 29.033574 20.060293 29.353516 19.501953 C 29.673457 18.943614 29.981865 18.701172 30.738281 18.701172 L 35.185547 18.701172 L 35.185547 12.009766 L 34.318359 11.892578 C 33.718567 11.811418 32.349197 11.621094 29.878906 11.621094 C 27.175808 11.621094 24.855567 12.357448 23.253906 14.023438 C 21.652246 15.689426 20.861328 18.170128 20.861328 21.373047 L 20.861328 24.046875 L 15.664062 24.046875 L 15.664062 31.566406 L 20.861328 31.566406 L 20.861328 44.470703 C 11.816995 42.554813 5 34.624447 5 25 C 5 13.942438 13.942438 5 25 5 z"></path>
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 50 50">
+      <path d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"></path>
+    </symbol>
+  </svg>
+
+  <header>
+    <h1>AIA Meta Ads Creatives</h1>
+    <p>The following ad creatives are installed on both Facebook and Instagram. Placements currently include the Facebook and Instagram feeds, Facebook Business Explore, Instagram Explore, Facebook search results, and Instagram search results.</p>
+    <p>You can view and interact with the ads and their comments by clicking the Facebook and Instagram logo buttons at the top of each card.</p>
+    <form id="filters" style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;" onsubmit="return false;">
+      <label>
+        Campaign:
+        <select id="category-filter" name="category">
+          <option value="all">All Campaigns</option>
+          <option value="aba-lead">ABA Lead Ads</option>
+          <option value="academic-aba">Academic ABA Ads</option>
+          <option value="academic-nonaba">Academic Non-ABA Ads</option>
+        </select>
+      </label>
+
+      <label>
+        Show:
+        <select id="status-filter" name="status">
+          <option value="all">All Ads</option>
+          <option value="active">Active Only</option>
+          <option value="inactive">Inactive Only</option>
+        </select>
+      </label>
+    </form>
+  </header>
+
+  <main>
+    <article id="c01" class="card">
+      <header>
+        <h2>Leads Ad C01</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311406301771/?dco_ad_token=Aaqmag2NewoTRRBsgvX8jFYSrnlaDnzUOrrpKaL7kiBYGvPBkXw7Z9WtA6bfJAeUJpJiK0cB52ftMW-s&dco_ad_id=120215690044430172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHr1cMHXO/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c01s.avif" type="image/avif">
+            <source srcset="./img/c01s.webp" type="image/webp">
+            <img src="./img/c01s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c02" class="card">
+      <header>
+        <h2>Leads Ad C02</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311552968423/?dco_ad_token=AaoJ9xdnjM5G6o4AEL5FUXwMokhkTW9m9kFHHZTeipzKJjMgPo677-B14xff6ZkuPTALevwz4toWmpDy&dco_ad_id=120216059562980172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHsGUM9G2/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c02s.avif" type="image/avif">
+            <source srcset="./img/c02s.webp" type="image/webp">
+            <img src="./img/c02s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c03" class="card">
+      <header>
+        <h2>Leads Ad C03</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311386301773/?dco_ad_token=Aao5Fe_00Oz3YGeOOoEptSRzVoL8uUcdwQk1uXXNbleatAC4Ml9eUyltcF8x7rYZ0qD-LbDcFckUStnD&dco_ad_id=120216059562970172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHrUSsN_X/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c03s.avif" type="image/avif">
+            <source srcset="./img/c03s.webp" type="image/webp">
+            <img src="./img/c03s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c04" class="card">
+      <header>
+        <h2>Leads Ad C04</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311359635109/?dco_ad_token=AapYPdRnIM3VnBLYzP8OOUpK3WAoaypUgv3P0by8Pg-twDPu2rOPql7nGQnGCuPAFGXcsNrrsW5T4xqd&dco_ad_id=120218120974890172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHwlhsgbX/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c04s.avif" type="image/avif">
+            <source srcset="./img/c04s.webp" type="image/webp">
+            <img src="./img/c04s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c05" class="card">
+      <header>
+        <h2>Leads Ad C05</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311319635113/?dco_ad_token=AaqiiPRh_ysUx4AYICqUOWFl6G7m70aQ6nKboRVJ551Ea8IGvMNrEiCns1lnIPIyYzU6Ld2-TD47-gPa&dco_ad_id=120219284980970172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHrgcMnwr/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c05s.avif" type="image/avif">
+            <source srcset="./img/c05s.webp" type="image/webp">
+            <img src="./img/c05s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c06" class="card">
+      <header>
+        <h2>Leads Ad C06</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311349635110/?dco_ad_token=Aaq01FZ4qO34IFucZ-TLK1hyuWUVKFFWieexSc4HqSP6rHBk6slBXWDVPEEGKxku9MCEaO_C5HToaloh&dco_ad_id=120219284944680172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHrSbMp-Z/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c06s.avif" type="image/avif">
+            <source srcset="./img/c06s.webp" type="image/webp">
+            <img src="./img/c06s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c07" class="card">
+      <header>
+        <h2>Leads Ad C07</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311339635111/?dco_ad_token=AaoiSqe-UATu8odpgego_qiEPvXH91HC8a1cBq6EWIL6zX0R3g4S3td50TRx2cmk3VcQVC900cRrMlKe&dco_ad_id=120219470175240172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHriQsQcu/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c07s.avif" type="image/avif">
+            <source srcset="./img/c07s.webp" type="image/webp">
+            <img src="./img/c07s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c08" class="card">
+      <header>
+        <h2>Leads Ad C08</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311419635103/?dco_ad_token=AaqKnCj8uM3i-iUI0wmBAA5GvDX77zeJsecJjoW67JLLlx_9yUyMBTq-Q6aPD7ndLP6kCr2AJmnmgVlS&dco_ad_id=120219486068660172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHry0s1K6/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c08s.avif" type="image/avif">
+            <source srcset="./img/c08s.webp" type="image/webp">
+            <img src="./img/c08s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c09" class="card">
+      <header>
+        <h2>Leads Ad C09</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311332968445/?dco_ad_token=AaqmUrbXc47eP1FfknRdMFQ4OF6cX_61h4v4vRu-TY7WjCvStJXOdNo5N04lxVPqEaEONG8AewWuDtKP&dco_ad_id=120222221578780172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHr2GseqJ/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c09s.avif" type="image/avif">
+            <source srcset="./img/c09s.webp" type="image/webp">
+            <img src="./img/c09s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c10" class="card">
+      <header>
+        <h2>Leads Ad C10</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311329635112/?dco_ad_token=AaoclG7J9wOybsjOdfkc2f1R3vdlBW3zxNXG4jKBMr2UFjqrNVY1XeZeIWSewMmrLAuxHZAMtcx41PZK&dco_ad_id=120222221578790172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHsFgs-6w/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c10s.avif" type="image/avif">
+            <source srcset="./img/c10s.webp" type="image/webp">
+            <img src="./img/c10s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c11" class="card">
+      <header>
+        <h2>Leads Ad C11</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/993311356301776/?dco_ad_token=AaoUOWWlWqrEJ_mAF-sTckmBgVM4B3Jyco-dn8R3O37YPjyKtOA31u2KnkjYgazAbksh7CHKvrl6eqMR&dco_ad_id=120222221578770172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJdHsm-sAA1/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c11s.avif" type="image/avif">
+            <source srcset="./img/c11s.webp" type="image/webp">
+            <img src="./img/c11s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c12" class="card">
+      <header>
+        <h2>Leads Ad C12</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1001507792148799/?dco_ad_token=AaoZ-kCgN55N9PFvv3_1dJe2ZQJaoyvZZX0xAQB9lNU-L49lZVmf3YlK8DX470k3UulvC3GTAMGP-20l&dco_ad_id=120223803798020172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DJ7nxpJsTK7/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c12s.avif" type="image/avif">
+            <source srcset="./img/c12s.webp" type="image/webp">
+            <img src="./img/c12s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c13" class="card">
+      <header>
+        <h2>Leads Ad C13</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1002990632000515/?dco_ad_token=AapOgjzU0xufJC858-Z7TzOWRsWNmBWMBbqoQmse0uLyq97-SP9SyqmSguy3gN1Bt-YzY00D2GIUxWLX&dco_ad_id=120223803798000172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DKAvOpbMC7o/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c13s.avif" type="image/avif">
+            <source srcset="./img/c13s.webp" type="image/webp">
+            <img src="./img/c13s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c14" class="card">
+      <header>
+        <h2>Leads Ad C14</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1006079741691604/?dco_ad_token=AaoQ8MlxMOqVEmiTPlHCzFTEuqiraCnyBd2zzJA61aFM45ZSdIxUUCWdrLS1KcE7T556-1MBgYPUjrZz&dco_ad_id=120223803798010172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DKLpYu7MSlw/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c14s.avif" type="image/avif">
+            <source srcset="./img/c14s.webp" type="image/webp">
+            <img src="./img/c14s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c15" class="card">
+      <header>
+        <h2>Leads Ad C15</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1011638814469030/?dco_ad_token=Aar3q3MihdZnraVmiMAubG1jcct8bZbKQ7_Zu9IVd9fLWceq5HSqsejbCHXkIT5pBN7XzJZJIu5Tynum&dco_ad_id=120223803797990172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DKfViFbsa2F/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c15s.avif" type="image/avif">
+            <source srcset="./img/c15s.webp" type="image/webp">
+            <img src="./img/c15s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c16" class="card">
+      <header>
+        <h2>Leads Ad C16</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1015437947422450/?dco_ad_token=AaoAZhiIx1Jqc71HnYHLtWrAUEJnlUSZDySJO8CvNHYmwHsdis6m2yhzVPPhz_TWLhTNdnABJUVXsMNF&dco_ad_id=120225379083450172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DKtCYNvMrp0/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c16s.avif" type="image/avif">
+            <source srcset="./img/c16s.webp" type="image/webp">
+            <img src="./img/c16s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c17" class="card">
+      <header>
+        <h2>Leads Ad C17</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1019894473643464/?dco_ad_token=AappbH9euvOBx5HEzza5qgSAUnBJS87rYarzSoszgwkrD21EmQVtlp7PKsR5G6b-lrbEnG2iDgUVYcoN&dco_ad_id=120225950830820172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DK8gmk-Mejs/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c17s.avif" type="image/avif">
+            <source srcset="./img/c17s.webp" type="image/webp">
+            <img src="./img/c17s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c18" class="card">
+      <header>
+        <h2>Leads Ad C18</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1025595526406692/?dco_ad_token=AarlUDhF2aWBtBibb852Abs7I1_eI4Wg5zw5ye6Ce_CJu7qdImSw0kgjE69eqON0UYXPL2WRZ3HO1Wfi&dco_ad_id=120226345099110172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DLQfAzwMwgp/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c18s.avif" type="image/avif">
+            <source srcset="./img/c18s.webp" type="image/webp">
+            <img src="./img/c18s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c19" class="card">
+      <header>
+        <h2>Leads Ad C19</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1028207659478812/?dco_ad_token=AaqSV_LhoyxeDpNXf3tD4MPy89JPlPmAmTA2UCh9_ngplFyddRUWtAytVcWpB3AgSUeRcKjjH4JqW9Kl&dco_ad_id=120226438553160172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DLY9axkMsgu/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c19s.avif" type="image/avif">
+            <source srcset="./img/c19s.webp" type="image/webp">
+            <img src="./img/c19s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c20" class="card">
+      <header>
+        <h2>Leads Ad C20</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1033544922278419/?dco_ad_token=AaqUaEFC4Fdf0POCRg73YdSe9KHtumV6O6h3iPgUeBYIY9qywvXvS-vkAeAtAVPXXZx-W427zGW7y6ZD&dco_ad_id=120226667176600172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DLqWBi2M6ii/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c20s.avif" type="image/avif">
+            <source srcset="./img/c20s.webp" type="image/webp">
+            <img src="./img/c20s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c21" class="card">
+      <header>
+        <h2>Leads Ad C21</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1050013977298180/?dco_ad_token=AaqAJ5g-OJz9FKN7nSWOj_4h6qS-_KrYpeVZGqBQGurHxo39SHl-pTjyYESp7_DHyQXnRA0umP7jzOf5&dco_ad_id=120228204060340172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DMg6azmMOxQ/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c21s.avif" type="image/avif">
+            <source srcset="./img/c21s.webp" type="image/webp">
+            <img src="./img/c21s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c22" class="card">
+      <header>
+        <h2>Leads Ad C22</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1050018260631085/?dco_ad_token=AaqdvXNGiuXAYoe8aWR0sU8cpydO-zlGECSnGJaCkUmOsiq_HWRfWnU5pTd2r4074XGgytrZW-fVt3A5&dco_ad_id=120228227200360172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DMg7QXDMBvC/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c22s.avif" type="image/avif">
+            <source srcset="./img/c22s.webp" type="image/webp">
+            <img src="./img/c22s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c23" class="card">
+      <header>
+        <h2>Leads Ad C23</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1053263430306568/?dco_ad_token=AaplaxpSasezqhPIlcQhib12Yr1LkNvID41GQrWaR9Z4jO4smWlYGLyHgMi5ip2Nyrs6HvVTEQeaE_ao&dco_ad_id=120228227200370172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DMq3LviMnzt/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c23s.avif" type="image/avif">
+            <source srcset="./img/c23s.webp" type="image/webp">
+            <img src="./img/c23s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c24" class="card">
+      <header>
+        <h2>Leads Ad C24</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1055600143406230/?dco_ad_token=AaollK4DLqb3z5d-zStAgvsTISoCbCwIkxH5FYzuxlskfhTTQpGUJ1lQ-rVBRnfrcbzp5Zt_t4mSl288&dco_ad_id=120228227152490172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DMyITZ0MFB9/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c24s.avif" type="image/avif">
+            <source srcset="./img/c24s.webp" type="image/webp">
+            <img src="./img/c24s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c25" class="card">
+      <header>
+        <h2>Leads Ad C25</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1058736523092592/?dco_ad_token=Aararbkl4otHEWtVShZa1o1QlbmLaUdn-mIs9f0zF5DNTGSe6SzWZ7qWAPjngIet3HbGfURyjz9h4S0B&dco_ad_id=120229387357450172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DM8ZzuJMgSF/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c25s.avif" type="image/avif">
+            <source srcset="./img/c25s.webp" type="image/webp">
+            <img src="./img/c25s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c26" class="card">
+      <header>
+        <h2>Leads Ad C26</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1071709875128590/?dco_ad_token=AapJH9e2Bf1jGxuC_qiu6M-Db5pEVPZ66Oq495u9Vrt80Nx0j4nCRF5RBaIJQbFXsv9ywuIsH2rTW-c_&dco_ad_id=120230561959950172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DNl5SstMOVm/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c26s.avif" type="image/avif">
+            <source srcset="./img/c26s.webp" type="image/webp">
+            <img src="./img/c26s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c27" class="card">
+      <header>
+        <h2>Leads Ad C27</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1071710428461868/?dco_ad_token=Aaru2ERU369yHjMYxFNQdb0Qg8uBpNARopIeSLfiPPy-mwdezEGr9bcVOx9AFHDKFFk2JPdim8MYTUcA&dco_ad_id=120230561959940172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DNl5Wl8Mr9-/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c27s.avif" type="image/avif">
+            <source srcset="./img/c27s.webp" type="image/webp">
+            <img src="./img/c27s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c28" class="card">
+      <header>
+        <h2>Leads Ad C28</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1071711141795130/?dco_ad_token=Aaolo4p-yuUQ4VUAZ1Cg2N2_jr0hGL2tWiejThBgNHzyUBXOiyMKR9lzyIw9mOtiWlfocPHweGnCQMAy&dco_ad_id=120230562093130172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DNl5awoMuju/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c28s.avif" type="image/avif">
+            <source srcset="./img/c28s.webp" type="image/webp">
+            <img src="./img/c28s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c29" class="card">
+      <header>
+        <h2>Leads Ad C29</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1092237966409114/?dco_ad_token=AaqDFGn5oCQEw5hSK7oXIfSDfuPCl9b-VRDJZGndZdVe24HXUZoPCEYGx2ef7sv9z1mgxl6xe-wftpaV&dco_ad_id=120231616586680172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DOpOLAZgFTe/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c29s.avif" type="image/avif">
+            <source srcset="./img/c29s.webp" type="image/webp">
+            <img src="./img/c29s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c30" class="card">
+      <header>
+        <h2>Leads Ad C30</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1113043664328544/?dco_ad_token=AapYBhbG2ZWsX46QBDbYD0uf4ODFFg18wP9Z-ohbdf0R8zbJNGPFfa_8f07JWvAqHjbD9gtwOEne_HGw&dco_ad_id=120232982018530172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DPnBTo_jDC9/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c30s.avif" type="image/avif">
+            <source srcset="./img/c30s.webp" type="image/webp">
+            <img src="./img/c30s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c31" class="card">
+      <header>
+        <h2>Leads Ad C31</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1116434997322744/?dco_ad_token=AaqbRQ_eyNc-rtfvuasTfnfHiyUuTbEcmkOpAU99CjPo5uc_Sb2WH_uzpyg4IwDi-1CqCSoPOlFpIX53&dco_ad_id=120232982018540172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DPwgmG1DJWH/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c31s.avif" type="image/avif">
+            <source srcset="./img/c31s.webp" type="image/webp">
+            <img src="./img/c31s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c32" class="card">
+      <header>
+        <h2>Leads Ad C32</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1119190587047185/?dco_ad_token=AaqU662zP4wFG4DQRtxQoB4Fcaz-d1xS4Ex0hqGWvC9r-6YKuudxVqphseBSVGApe0wG5r_ruGddJNZA&dco_ad_id=120232982018550172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DP4e6e9DMjH/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c32s.avif" type="image/avif">
+            <source srcset="./img/c32s.webp" type="image/webp">
+            <img src="./img/c32s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c33" class="card">
+      <header>
+        <h2>Leads Ad C33</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1120128160286761/?dco_ad_token=Aaos4UnN-2FxgKUQa5mOlyWGx_xbF-Z_tgKt_DFLZ1DR5cwQW90dKVeJwW-1wkkT4jI5fotoPZuC6I-T&dco_ad_id=120232982018520172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DP7r4SkDPvg/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c33s.avif" type="image/avif">
+            <source srcset="./img/c33s.webp" type="image/webp">
+            <img src="./img/c33s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c34" class="card">
+      <header>
+        <h2>Leads Ad C34</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1150242010608709/?dco_ad_token=AaoBpWwOOvSwOSs95f6GJ4qpY6xWiY1U-ydr-Nrh-mza1dJ2O4KoT9r9mDJubeO0Q-jweHPJbJ7beaGX&dco_ad_id=120235265712500172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DRYGr1VjLEQ/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c34s.avif" type="image/avif">
+            <source srcset="./img/c34s.webp" type="image/webp">
+            <img src="./img/c34s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c35" class="card">
+      <header>
+        <h2>Leads Ad C35</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1150246157274961/?dco_ad_token=AaqT1K5WolTtlAaszZ0LF8JI__e9naiDvolNAxB-vi1TY0avYkcYhePp9x8dqdY0Zb_rrTuCMx-nLzod&dco_ad_id=120235265712520172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DRYHAX8jK6B/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c35s.avif" type="image/avif">
+            <source srcset="./img/c35s.webp" type="image/webp">
+            <img src="./img/c35s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+
+    <article id="c36" class="card">
+      <header>
+        <h2>Leads Ad C36</h2>
+        <span class="status-dot"></span>
+      </header>
+
+      <section class="button-links">
+        <h3>Visit: 
+          <span>
+            <a href="https://www.facebook.com/100068687637287/posts/1150245520608358/?dco_ad_token=Aao24MvSChER8IK46ck2wVfqb4OhyfhQ_Om530MEHb98Egdqyq9qfNxT8UmmEB6SEbLewgbbMH-8qHRt&dco_ad_id=120235265712510172" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-facebook"></use></svg></a>
+            <a href="https://www.instagram.com/p/DRYHXXQjLgs/#advertiser" target="_blank"><svg fill="currentColor" width="40" height="40"><use href="#icon-instagram"></use></svg></a>
+          </span>
+        </h3>
+      </section>
+
+      <figure>
+        <div class="ratio-box ratio-1x1">
+          <picture>
+            <source srcset="./img/c36s.avif" type="image/avif">
+            <source srcset="./img/c36s.webp" type="image/webp">
+            <img src="./img/c36s.jpg" alt="" loading="lazy" width="600" height="600">
+          </picture>
+        </div>
+      </figure>
+    </article>
+  </main>
+  <footer>
+    <h2>Beginning Reports</h2>
+    <p>When logged in to <a href="https://adsmanager.facebook.com/adsmanager/manage/accounts?act=973460868056419&business_id=544065836936392#">Meta Ads Manager</a> with the <strong>Rula Diab</strong> Facebook account, you can view a <a href="https://fb.me/2GBhTvp108xoQeD">rough report</a> of Meta Ads spend and leads aquired. We also put together a simple line graph view of the <a href="https://adsmanager.facebook.com/adsmanager/reporting/business_view?act=973460868056419&business_id=544065836936392&selected_report_id=1369638981045736">number of leads &amp; price per lead</a>. 🚀</p>
+  </footer>
+  <script>
+    const cards = document.querySelectorAll('article.card');
+    const statusFilter = document.getElementById('status-filter');
+    const categoryFilter = document.getElementById('category-filter');
+
+    function applyFilters() {
+      const status = statusFilter.value;
+      const category = categoryFilter.value;
+
+      cards.forEach((card, index) => {
+        const position = index + 1;
+        const isActive = runningIndices.includes(position);
+
+        let matchesStatus = true;
+        if (status === 'active') matchesStatus = isActive;
+        else if (status === 'inactive') matchesStatus = !isActive;
+
+        let matchesCategory = true;
+        if (category === 'aba-lead') matchesCategory = ABALeadAds.includes(position);
+        else if (category === 'academic-aba') matchesCategory = AcademicABAAds.includes(position);
+        else if (category === 'academic-nonaba') matchesCategory = AcademicNonABAAds.includes(position);
+
+        card.classList.toggle('hidden', !(matchesStatus && matchesCategory));
+      });
+    }
+
+    statusFilter.addEventListener('change', applyFilters);
+    categoryFilter.addEventListener('change', applyFilters);
+
+    // Initial call
+    applyFilters();
+
+    // Hover titles on dots
+    document.querySelectorAll('.status-dot').forEach(dot => {
+      const card = dot.closest('article.card');
+      if (!card) return;
+
+      dot.title = 'not running';
+      dot.addEventListener('mouseenter', () => {
+        if (card.classList.contains('running')) dot.title = 'running';
+      });
+      dot.addEventListener('mouseleave', () => {
+        dot.title = 'not running';
+      });
+    });
+
+    // Add 'running' class to running ads
+    cards.forEach((card, index) => {
+      if (runningIndices.includes(index + 1)) card.classList.add('running');
+    });
+
+    // Disable dead links
+    document.querySelectorAll('a[href=""]').forEach(anchor => {
+      anchor.addEventListener('click', event => {
+        event.preventDefault();
+        alert('Link not yet available');
+      });
+    });
+
+    (function () {
+      // Create overlay, panel, close button, static img, and flying img
+      const overlay = document.createElement('div');
+      overlay.id = 'lightbox-overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+
+      const panel = document.createElement('div');
+      panel.id = 'lightbox-panel';
+
+      const closeBtn = document.createElement('button');
+      closeBtn.id = 'lightbox-close';
+      closeBtn.type = 'button';
+      closeBtn.innerHTML = '&times;';
+
+      const panelImg = document.createElement('img');
+      panelImg.id = 'lightbox-img';
+      panelImg.alt = '';
+
+      panel.appendChild(closeBtn);
+      panel.appendChild(panelImg);
+
+      const flyImg = document.createElement('img');
+      flyImg.id = 'lightbox-fly';
+      flyImg.alt = '';
+
+      overlay.appendChild(panel);
+      overlay.appendChild(flyImg);
+      document.body.appendChild(overlay);
+
+      let isOpen = false;
+      let activeImg = null;
+      let activeRect = null;
+
+      function openLightbox(sourceImg) {
+        if (isOpen) return;
+        isOpen = true;
+        activeImg = sourceImg;
+        activeRect = sourceImg.getBoundingClientRect();
+
+        const src = sourceImg.currentSrc || sourceImg.src;
+        flyImg.src = src;
+        panelImg.src = src;
+        panelImg.alt = sourceImg.alt || '';
+
+        const rect = activeRect;
+
+        // Starting position/size
+        flyImg.style.width = rect.width + 'px';
+        flyImg.style.height = rect.height + 'px';
+        flyImg.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1)`;
+        flyImg.style.opacity = '1';
+
+        overlay.style.display = 'block';
+        overlay.classList.remove('tint');
+        panel.classList.remove('visible');
+        document.body.style.overflow = 'hidden';
+
+        void overlay.offsetWidth;
+        overlay.classList.add('tint');
+
+        // Compute target size: fit into viewport AND 80vmin, both width & height
+        const viewportW = window.innerWidth;
+        const viewportH = window.innerHeight;
+        const vmin = Math.min(viewportW, viewportH);
+
+        const maxSide = 0.8 * vmin; // 80vmin in px
+
+        const availableW = Math.min(viewportW, maxSide); // respects min(100vw, 80vmin)
+        const availableH = Math.min(viewportH, maxSide); // respects min(100vh, 80vmin)
+
+        const scaleX = availableW / rect.width;
+        const scaleY = availableH / rect.height;
+        const scale = Math.min(scaleX, scaleY); // keep both within limits
+
+        const targetWidth = rect.width * scale;
+        const targetHeight = rect.height * scale;
+
+        const targetX = (viewportW - targetWidth) / 2;
+        const targetY = (viewportH - targetHeight) / 2;
+
+        flyImg.style.transition = 'transform 0.75s ease';
+
+        requestAnimationFrame(() => {
+          flyImg.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${scale})`;
+        });
+
+        const onFlyEnd = (event) => {
+          if (event.propertyName !== 'transform') return;
+          flyImg.removeEventListener('transitionend', onFlyEnd);
+
+          // Hide the flying image, show the panel
+          flyImg.style.opacity = '0';
+          panel.classList.add('visible');
+        };
+        flyImg.addEventListener('transitionend', onFlyEnd);
+      }
+
+      function closeLightbox() {
+        if (!isOpen) return;
+
+        panel.classList.remove('visible');
+
+        const onPanelFadeOut = (event) => {
+          if (event.propertyName !== 'opacity') return;
+          panel.removeEventListener('transitionend', onPanelFadeOut);
+
+          const rect = activeRect;
+          const viewportW = window.innerWidth;
+          const viewportH = window.innerHeight;
+          const vmin = Math.min(viewportW, viewportH);
+          const maxSide = 0.8 * vmin;
+
+          const availableW = Math.min(viewportW, maxSide);
+          const availableH = Math.min(viewportH, maxSide);
+
+          const scaleX = availableW / rect.width;
+          const scaleY = availableH / rect.height;
+          const scale = Math.min(scaleX, scaleY);
+
+          const targetWidth = rect.width * scale;
+          const targetHeight = rect.height * scale;
+          const targetX = (viewportW - targetWidth) / 2;
+          const targetY = (viewportH - targetHeight) / 2;
+
+          // Make fly image visible at "large" position first
+          flyImg.style.opacity = '1';
+          flyImg.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${scale})`;
+
+          void flyImg.offsetWidth;
+
+          overlay.classList.remove('tint');
+          flyImg.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1)`;
+
+          const onFlyBackEnd = (event2) => {
+            if (event2.propertyName !== 'transform') return;
+            flyImg.removeEventListener('transitionend', onFlyBackEnd);
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+            isOpen = false;
+            activeImg = null;
+          };
+          flyImg.addEventListener('transitionend', onFlyBackEnd);
+        };
+
+        panel.addEventListener('transitionend', onPanelFadeOut);
+      }
+
+      // Clicking the tinted background closes the lightbox
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+          closeLightbox();
+        }
+      });
+
+      // Close button
+      closeBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        closeLightbox();
+      });
+
+      // Don't close when clicking inside the panel content
+      panel.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+
+      // ESC key closes the lightbox
+      window.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+          closeLightbox();
+        }
+      });
+
+      // Make each card's H2 + image open the lightbox
+      cards.forEach((card) => {
+        const h2 = card.querySelector('header h2');
+        const img = card.querySelector('figure img');
+        if (!img) return;
+
+        img.style.cursor = 'zoom-in';
+        if (h2) h2.style.cursor = 'zoom-in';
+
+        img.addEventListener('click', () => openLightbox(img));
+        if (h2) {
+          h2.addEventListener('click', () => openLightbox(img));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+

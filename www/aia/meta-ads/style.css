@@ -1,0 +1,266 @@
+:root {
+  --gap: 1.25rem;
+  --card-bg: #fff;
+  --card-radius: 0.25rem;
+  --card-shadow: 4px 4px 6px #ccc;
+  --brand: #254080;
+  --brand2: #ff914d;
+  --text: var(--brand);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: rgb(252, 242, 226);
+  color: var(--text);
+  line-height: 1.5;
+  padding: var(--gap);
+  margin-bottom: 3rem;
+}
+
+main {
+  display: grid;
+  gap: var(--gap);
+  /* 3–4 cards per row, responsive */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1400px;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+}
+
+header,
+footer {
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+}
+
+a,
+a:visited {
+  color: #fd904c;
+}
+a:hover,
+a:active {
+  color: #febe59;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+
+  & a,
+  & a:visited {
+    color: var(--brand);
+  }
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+/* ========== Card ========== */
+article.card {
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--gap);
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:first-child):not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+
+  & header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0;
+  
+    & h2 {
+      font-size: 1.5rem;
+      color: var(--brand);
+      margin-bottom: 0;
+    }
+
+    & .status-dot {
+      cursor: help;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #c00;
+      flex-shrink: 0;
+    }
+  }
+
+  &.running .status-dot {
+    background-color: #080;
+  }
+
+  & .button-links {
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+
+    & h3 {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & a {
+      display: inline-block;
+      color: var(--brand2);
+
+      &:hover {
+        color: var(--brand);
+      }
+
+      &:last-of-type {
+        margin-left: 1rem;
+      }
+
+      & svg {
+        vertical-align: bottom;
+        width: 1.2em;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* ========== Figures ========== */
+figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .1rem;
+}
+
+figcaption {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Maintain aspect ratio with a wrapping div to avoid CLS */
+.ratio-box {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: #e6e8ec;
+}
+
+/* Square (1:1) */
+.ratio-1x1::before {
+  content: "";
+  display: block;
+  padding-top: 100%;     /* 1 / 1  */
+}
+
+/* 300 × 157 -- exact ratio ≈ 1.911:1  */
+.ratio-300x157::before {
+  content: "";
+  display: block;
+  padding-top: 52.3333%; /* 157 / 300 */
+}
+
+.ratio-box img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none !important;
+}
+.toggle-btn {
+  padding: .5rem;
+  background-color: #fb5;
+  border: 2px solid #fb5;
+  border-radius: .2rem;
+  cursor: pointer;
+  width: 12rem;
+
+  &:hover {
+    background-color: #fb50;
+  }
+}
+
+#lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0); /* will tint to 80% black */
+  display: none;
+  z-index: 1000;
+  transition: background-color 0.75s ease; /* matches grow animation */
+}
+
+#lightbox-overlay.tint {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#lightbox-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #469;
+  padding: max(var(--gap), 5vmin);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1002;                  /* ensure above #lightbox-fly */
+}
+
+#lightbox-panel.visible {
+  opacity: 1;
+}
+
+#lightbox-panel img {
+  display: block;
+  max-width: min(100%, 80vmin);
+  max-height: min(100%, 80vmin);
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 2rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+#lightbox-close:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* flying image used for the grow/shrink animation */
+#lightbox-fly {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  will-change: transform;
+  transition: transform 0.75s ease;
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 1;
+}
